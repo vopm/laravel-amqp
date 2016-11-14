@@ -28,6 +28,7 @@ return [
             'ssl_options'           => [],
 
             'exchange'              => 'amq.topic',
+            'exchange_force_declare' => true,
             'exchange_type'         => 'topic',
             'exchange_passive'      => false,
             'exchange_durable'      => true,

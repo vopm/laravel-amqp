@@ -64,17 +64,19 @@ class Request extends Context
             durable: true // the exchange will survive server restarts
             auto_delete: false //the exchange won't be deleted once the channel is closed.
         */
-
-        $this->channel->exchange_declare(
-            $exchange,
-            $this->getProperty('exchange_type'),
-            $this->getProperty('exchange_passive'),
-            $this->getProperty('exchange_durable'),
-            $this->getProperty('exchange_auto_delete'),
-            $this->getProperty('exchange_internal'),
-            $this->getProperty('exchange_nowait'),
-            $this->getProperty('exchange_properties')
-        );
+        
+        if ($this->getProperty('exchange_force_declare')){
+            $this->channel->exchange_declare(
+                $exchange,
+                $this->getProperty('exchange_type'),
+                $this->getProperty('exchange_passive'),
+                $this->getProperty('exchange_durable'),
+                $this->getProperty('exchange_auto_delete'),
+                $this->getProperty('exchange_internal'),
+                $this->getProperty('exchange_nowait'),
+                $this->getProperty('exchange_properties')
+            );    
+        }
 
         $queue = $this->getProperty('queue');
 
